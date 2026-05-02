@@ -1,10 +1,8 @@
-from sqlalchemy import create_engine, inspect
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy import create_engine
+from sqlalchemy.orm import declarative_base, sessionmaker
 import os
 
 DATABASE_URL = "sqlite:///./papertrail.db"
-
-Base = declarative_base()
 
 engine = create_engine(
     DATABASE_URL,
@@ -12,6 +10,9 @@ engine = create_engine(
 )
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+Base = declarative_base()
+
 
 def get_db():
     db = SessionLocal()
@@ -22,6 +23,4 @@ def get_db():
 
 
 def create_tables():
-    """Create all tables. Models must be imported before calling this."""
     Base.metadata.create_all(bind=engine)
-    print("Database tables created successfully!")

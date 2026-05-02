@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import { HiArrowRight, HiSparkles, HiLink, HiChartBar } from 'react-icons/hi'
+import { HiArrowRight, HiSparkles, HiLink, HiChartBar, HiOutlineBeaker, HiAcademicCap, HiEye } from 'react-icons/hi'
 
 const Home: React.FC = () => {
   const navigate = useNavigate()
@@ -44,22 +44,23 @@ const Home: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-center space-y-8 max-w-4xl mx-auto"
           >
             <span className="px-4 py-1.5 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-bold tracking-widest uppercase border border-indigo-500/20">
-              Introducing PaperTrail 1.0
+              Introducing PaperTrail 3-Layer Platform
             </span>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-6xl md:text-8xl font-extrabold tracking-tight"
+            >
+              Research Intelligence<br />
+              <span className="text-gradient">3 Layers Platform</span>
+            </motion.h1>
           </motion.div>
-          
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-6xl md:text-8xl font-extrabold tracking-tight"
-          >
-            Your Research, <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-blue-400 to-indigo-400">Reimagined.</span>
-          </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -89,23 +90,26 @@ const Home: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Features Grid */}
+        {/* Features Grid - 3 Layers */}
         <div className="grid md:grid-cols-3 gap-6 mt-32">
           {[
             {
-              title: 'Semantic Discovery',
-              description: 'Go beyond keywords. Explore papers through deep semantic meaning and citation relationships.',
-              icon: <HiSparkles className="text-2xl text-indigo-400" />,
+              title: 'For Researchers',
+              description: 'Novelty checks, project management, and citation verification to accelerate your research.',
+              icon: <HiOutlineBeaker className="text-2xl text-blue-400" />,
+              color: 'from-blue-600/20 to-indigo-600/20',
             },
             {
-              title: 'Citation Graph',
-              description: 'Visualize the evolution of a field with dynamic, interactive node-link diagrams of literature.',
-              icon: <HiLink className="text-2xl text-blue-400" />,
+              title: 'For Students',
+              description: 'Understand papers through simplification, find connections, and discover knowledge gaps.',
+              icon: <HiAcademicCap className="text-2xl text-green-400" />,
+              color: 'from-green-600/20 to-emerald-600/20',
             },
             {
-              title: 'AI Narratives',
-              description: 'Generate high-level summaries and "stories of the field" synthesized from dozens of papers.',
-              icon: <HiChartBar className="text-2xl text-purple-400" />,
+              title: 'For Reviewers',
+              description: 'AI-assisted peer review with citation verification and automated report generation.',
+              icon: <HiEye className="text-2xl text-purple-400" />,
+              color: 'from-purple-600/20 to-pink-600/20',
             }
           ].map((feature, i) => (
             <motion.div
@@ -113,7 +117,7 @@ const Home: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 + i * 0.1 }}
-              className="glass p-8 rounded-3xl space-y-4 group hover:bg-white/5 transition-all cursor-default"
+              className={`glass p-8 rounded-3xl space-y-4 group hover:bg-white/5 transition-all cursor-default bg-gradient-to-br ${feature.color}`}
             >
               <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center group-hover:scale-110 transition-transform">
                 {feature.icon}

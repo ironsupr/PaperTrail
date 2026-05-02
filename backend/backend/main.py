@@ -34,12 +34,9 @@ from services.auth_service import (
     authenticate_user, create_access_token, decode_token,
     get_password_hash,
 )
-from database import get_db, create_tables, engine
+from database import get_db, create_tables
 from models.user import User
 from models.project import Project
-
-# Create database tables on startup
-create_tables()
 
 app = FastAPI(title="PaperTrail OS API", version="1.0.0")
 
@@ -279,6 +276,31 @@ Answer based on the research context provided. Be specific and reference relevan
 @app.get("/api/health")
 async def health_check():
     return {"status": "ok", "service": "PaperTrail OS"}
+
+
+@app.post("/api/verify_citations")
+async def verify_citations(
+    file: UploadFile = File(None),
+    url: str = Form("")
+):
+    """Verify citations from PDF or URL (arXiv or Semantic Scholar)."""
+    try:
+        # Mock response for now - to be fully implemented
+        return {
+            "validCitations": [
+                {"citation": "Smith et al. (2023) Deep Learning Methods", "supports": True, "confidence": 0.95},
+                {"citation": "Johnson (2022) Neural Networks Today", "supports": True, "confidence": 0.88},
+            ],
+            "invalidCitations": [
+                {"citation": "Brown et al. (2021)", "reason": "Cannot verify claim support", "confidence": 0.45},
+            ],
+            "formatIssues": [
+                "Citation [3] missing publication year",
+                "Inconsistent citation format detected",
+            ],
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # Auth endpoints
